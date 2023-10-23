@@ -1,95 +1,75 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import {
+  Box,
+  Typography,
+  Switch,
+  Paper,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
+import {
+  ThemeProvider,
+  createTheme,
+  useTheme,
+  responsiveFontSizes,
+} from "@mui/material/styles";
+import { useState } from "react";
+import { styled } from "@mui/material/styles";
+import Navbar from "./Navbar";
+import BMI from "./bmical/page";
+import bmiImg from "../public/bmiImg.jpeg";
+import Image from "next/image";
+import CssBaseline from "@mui/material/CssBaseline";
+
+
 
 export default function Home() {
+  const [dark, setDark] = useState(false);
+  const theme = responsiveFontSizes(
+    createTheme({
+      palette: {
+        mode: dark ? "dark" : "light",
+      },
+    })
+  );
+  const mediaTheme = useTheme();
+  const matches = useMediaQuery(mediaTheme.breakpoints.up("sm"));
+
+  const MyContainer = styled("div")({
+    height: "100vh",
+    background: "grey",
+  });
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    <MyContainer
+      sx={{ [mediaTheme.breakpoints.up("sm")]: { backgroundColor: "white" } }}
+    >
+      <CssBaseline />
+      <nav>
+        <Navbar />
+      </nav>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: matches ? "row" : "column",
+          justifyContent: matches ? "space-evenly" : "center",
+          alignItems: "center",
+        }}
+        id="abc"
+      >
+        <Box sx={{ marginTop: "200px" }}>
+          <BMI />
+        </Box>
+        <Box sx={{ flex: 0.5, marginTop: "200px" }}>
+          <Image
+            src={bmiImg}
+            alt="Description"
+            layout="responsive"
+            width={500}
+            height={300}
+          />
+        </Box>
+      </Box>
+    </MyContainer>
+  );
 }
