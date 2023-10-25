@@ -49,7 +49,7 @@ const BMI: React.FC = () => {
       <Card sx={{ padding: "30px" }}>
         <ThemeProvider theme={theme}>
           <Paper sx={{ boxShadow: "none", padding: "20px" }}>
-            <Typography variant="h4">BMI Calculator</Typography>
+            <Typography variant="h4">BMI Calculator- New</Typography>
             <TextField
               id="outlined"
               label="Weight(kgs)"
